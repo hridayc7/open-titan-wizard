@@ -131,5 +131,9 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
         └── App.css              # Styling
 ```
 
+## Notes about some of the features
+Things that went well
+Things that did not go well, and would need iteration
+
 ## Note to David and Jefferey
 Hey guys, I really enjoyed working on this project and learned quite a bit. Hope you have as much fun using it as I did building it!
