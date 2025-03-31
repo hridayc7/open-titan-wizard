@@ -131,9 +131,43 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
         └── App.css              # Styling
 ```
 
-## Notes about some of the features
-Things that went well
-Things that did not go well, and would need iteration
+## 🔧 Things That Didn’t Work as Well (Needs Iteration)
+
+### Sourcing
+
+In both modes (Lumos and Revelio) — i.e. conceptual and codebase query modes — sourcing was not entirely accurate.
+
+#### Lumos (Conceptual)
+The reason sourcing fell off here was because I downloaded the files from the HTML rather than from the GitHub repository. When I did this, I extracted the raw text from each page into text files and converted links in the following format:
+
+https://opentitan.org/book/hw/index.html → hw_index.txt
+https://opentitan.org/book/hw/ip/otbn/doc/developing_otbn.html → hw_ip_otbn_doc_developing_otbn.txt
+
+
+The issue here was when I had the thought of sourcing the data in my answers, my metadata only contained the file path directories I broke each link into, which was problematic.
+
+If I had thought about sourcing in the beginning, I would have paid more attention to storing the URL in metadata when chunking the documents.
+
+What I tried to do was build the source back up based on the file path, but I ran into the issue where the program wasn’t able to determine differences between terms that had organically had underscores and terms that manually had underscores (added in by me when downloading files). For instance, `developing_otbn` would become `developing/otbn` when reconstructing the path.
+
+#### Revelio (Codebase)
+This one hallucinated at some points by producing images for sources. I’m not entirely sure why. I had manually, naively cleaned up the GitHub repo before embedding it, and I thought I removed all image files prior to embedding, but I suppose I missed out on some. Still not sure why the image was returned — will have to take a look at the code.
+
+Also, since Revelio still makes use of the HTML database, sourcing issues from the HTML database persist in this chat.
+
+### Multi-Query / Advanced Reasoning
+
+The idea behind Multi-Query / Advanced Reasoning was that we take our input query, break it up into multiple questions, and then we should hit more diverse parts — i.e. hit different leaves of the hierarchical database we built — when retrieving documents.
+
+However, a mistake I made was that I weighed documents seen more frequently higher than others. This would be good if we had a question that was vague and needed consensus, but for questions that are very specific and would require diversity in answers, the weightage system at the end was not the best idea.
+
+---
+
+## Conclusion
+
+I think there may be some more changes I would make to this project, based on my talk with David and some further introspection. Plus, I can always go back to the codebase and see points that could be easily sped up.  
+But, I’m still proud of the work I put into this project, and it does get a lot of things correct as well. Only way is up 🙂
+
 
 ## Note to David and Jefferey
 Hey guys, I really enjoyed working on this project and learned quite a bit. Hope you have as much fun using it as I did building it!
