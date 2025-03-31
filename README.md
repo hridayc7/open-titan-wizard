@@ -133,4 +133,4 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
 ```
 
 ## Note to David and Jefferey
-Hey guys, I had a lot of fun and learned quite a bit with this project! Hope you have as much fun using it as I did building it!
+Hey guys, I really enjoyed working on this project and learned quite a bit. Hope you have as much fun using it as I did building it!
