@@ -9,12 +9,9 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
 - **Dual RAG System**: Two specialized models for different types of queries
   - **Lumos**: Conceptual model for documentation-based questions
   - **Revelio**: Technical model for codebase-specific queries
-- **Advanced Reasoning**: Break complex queries into sub-questions for more comprehensive answers
 - **Conversation Memory**: Maintains chat history for context-aware responses
-- **Source Attribution**: All answers include links to source documentation or code
 - **Clean UI**: Modern React interface with light/dark mode support
 - **Session Management**: Create, rename, and organize multiple conversations
-- **Code Highlighting**: Syntax highlighting for code snippets in responses
 
 ## System Architecture
 
