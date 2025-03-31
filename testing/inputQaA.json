@@ -1,0 +1,58 @@
+[
+  {
+    "question": "What cipher block modes are supported by the AES hardware IP in OpenTitan, and how is Galois/Counter Mode (GCM) handled?",
+    "answer": "The AES hardware IP in OpenTitan supports the following cipher block modes: Electronic Codebook (ECB), Cipher Block Chaining (CBC), Cipher Feedback (CFB) with a fixed segment size of 128 bits (CFB-128), Output Feedback (OFB), and Counter (CTR) mode. Galois/Counter Mode (GCM) is not directly supported by the AES unit but can be implemented by leveraging the Ibex core for the GHASH operation, with potential performance enhancements from the RISC-V Bit-Manipulation Extension."
+  },
+  {
+    "question": "How does the AES unit in OpenTitan balance performance and security, and what compile-time configurations are available?",
+    "answer": "The AES unit targets medium performance with 16 parallel S-Boxes and achieves approximately 1 cycle per round in unmasked mode and ~5 cycles per round in domain-oriented masking (DOM) mode. It includes first-order masking to deter side-channel analysis, and fault injection countermeasures on the control path. Compile-time Verilog parameters allow enabling/disabling AES-192 support and DOM-based masking, offering flexibility in area, performance, and security tradeoffs."
+  },
+  {
+    "question": "What is the purpose of the otbn_core_model in the OTBN DV testbench, and how does it aid in verifying correctness?",
+    "answer": "The otbn_core_model is a DPI-based module used in the OTBN DV testbench that wraps an instruction set simulator (ISS) subprocess. It checks that the RTL design behaves the same as the ISS by comparing outputs and states during simulation. It helps ensure the correctness of OTBN by monitoring start and done signals and performing self-checks through communication with the model agent and test sequences."
+  },
+  {
+    "question": "What are the primary capabilities and limitations of the HMAC hardware IP in OpenTitan?",
+    "answer": "The HMAC IP supports both SHA-2 and HMAC modes with SHA-2 256/384/512 digest sizes and configurable key lengths up to 1024 bits, though keys must fit within the block size of the selected SHA variant. It features context switching for multiple message streams and a 32 x 32-bit message FIFO. However, it lacks side-channel and fault injection protections, relying on software or KMAC for secure MAC operations. The module can wipe internal state with a software-provided value but does not include an internal PRNG for this. A future version may support secret key updates via a key manager and allow direct digest bus output."
+  },
+  {
+    "question": "What I2C protocol features and operational modes are supported by the I2C hardware IP in OpenTitan?",
+    "answer": "The I2C hardware IP supports both controller (master) and target (slave) modes, with compatibility for Standard-mode (100 kbaud), Fast-mode (400 kbaud), and Fast-mode Plus (1 Mbaud). It supports mandatory I2C features like start/stop conditions, ACK, and 7-bit addressing, along with optional capabilities like clock stretching, controller arbitration, and programmable ACK. It provides interrupt mechanisms for both modes, loopback support, and a byte-formatted register interface. The module is compliant with I2C specification rev. 6 and supports 7-bit address space and bus arbitration handling."
+  },
+  {
+    "question": "What cryptographic functions and side-channel protections are provided by the KMAC HWIP, and how can a DV engineer expect it to behave in masked vs unmasked modes?",
+    "answer": "The KMAC HWIP supports SHA3-224/256/384/512, SHAKE128/256, cSHAKE128/256, and KMAC with secret key lengths up to 512 bits. It supports arbitrary-length input and output, with customization fields (N and S). For side-channel protection, the Keccak core implements first-order masking using Domain-Oriented Masking (DOM), which can be disabled via compile-time Verilog parameters. In masked mode, performance is lower but the design is hardened against first-order SCA attacks. DV engineers should consider verifying behavior across both masked and unmasked configurations and ensure digest and state memory reads align with expected Keccak round outputs."
+  },
+  {
+    "question": "What is DVSim in OpenTitan, and what tool flows does it manage?",
+    "answer": "DVSim is a Python-based build and run system used in OpenTitan to standardize the execution of various EDA tool flows. It manages flows such as simulation, coverage unreachability (UNR), formal property verification (FPV), lint, synthesis, CDC, and RDC. It simplifies tool invocation through a single command-line interface and supports both pre- and post-processing steps. DVSim also integrates third-party Python libraries like Hjson and Enlighten, and is configured through HJSON files located in the OpenTitan repository under util/dvsim."
+  },
+  {
+    "question": "How are clocks managed across different groups in OpenTitan, and what role does software play in clock control?",
+    "answer": "OpenTitan groups clocks based on module roles such as power-up, transactional, infrastructural, security, peripheral, and timers. Software can influence clock gating in some groups like 'transactional' and 'peripheral', but only via register hints or wait-for-interrupt mechanisms, which require modules to be idle. Groups critical to infrastructure and security do not allow software control to prevent deadlock or security compromise. Each group is logically organized, and clock control may depend on idle signals, multi-host access considerations, and safe gating conditions."
+  },
+  {
+    "question": "How are interrupts and alerts standardized and implemented across OpenTitan peripherals?",
+    "answer": "Interrupts in OpenTitan follow a standardized CIP model with three main registers: INTR_STATE (current status), INTR_ENABLE (masking), and INTR_TEST (testing). They are either 'Event' or 'Status' types, with specific behaviors around acknowledgment. Alerts, unlike interrupts, are hardware-only and classified as recoverable or fatal. Fatal alerts latch until reset, and cause registers must be read-only. Both mechanisms ensure robust, race-free communication between hardware and software, with alerts typically used for security-critical fault detection."
+  },
+  {
+    "question": "What is the recommended process for starting a new hardware design in OpenTitan?",
+    "answer": "New hardware designs in OpenTitan begin with a concept or proposal, often captured in a Google Doc and following the RFC (Request for Comment) process. The design evolves through stages: Specification, In Development, and Signed Off. Contributors should aim to get early feedback via the Technical Committee and follow guidance on feature declaration, security considerations, and code contribution practices. The goal is to balance flexibility with enough structure to support collaboration, reuse, and certification readiness."
+  },
+  {
+    "question": "How should developers work with hardware code from external repositories in the OpenTitan project?",
+    "answer": "Code under hw/vendor is imported from external 'upstream' repositories. Developers should report and submit fixes upstream whenever possible. OpenTitan uses a vendoring system to re-import updated code. If upstream changes are impractical, local modifications are allowed and tracked. The process helps ensure reproducibility, maintainability, and alignment with open-source collaboration practices while maintaining a buildable and reviewed monorepo."
+  },
+  {
+    "question": "What is Ipgen in OpenTitan and how does it help generate IP blocks?",
+    "answer": "Ipgen is a templating tool used to generate IP blocks from Mako-based templates in OpenTitan. Each IP template includes a parameterized HJSON descriptor and .tpl source files. These templates are rendered into usable SystemVerilog and FuseSoC files. Ipgen ensures instance-specific naming to avoid symbol conflicts and supports both command-line and Python library usage. It facilitates reuse and modularity across projects, particularly when top-level designs require many uniquely parameterized IP blocks."
+  },
+  {
+    "question": "What does the uvmdvgen tool do in the OpenTitan verification flow?",
+    "answer": "Uvmdvgen is a Python tool that auto-generates boilerplate UVM testbench and agent code for a given DUT. It supports both DV and CIP-based libraries and provides interfaces, sequences, agents, environments, and test classes. The tool also creates FuseSoC core files and sim targets, accelerating the bring-up of a verification environment to V1 readiness. Flags like -a, -e, -c, -hi, -hr, and -ha customize agent/env generation, including support for interrupts, alerts, and RAL models."
+  },
+  {
+    "question": "What are the health checks and operating modes of the ENTROPY_SRC IP in OpenTitan?",
+    "answer": "The ENTROPY_SRC IP interfaces with a physical true random noise source (PTRNG) and performs multiple health checks, including Repetition Count, Adaptive Proportion, Bucket, and Markov tests, plus firmware and vendor-defined checks. It supports boot-time and FIPS/CC-compliant modes, using SHA-3 conditioning to ensure full entropy. Boot-time mode delivers faster entropy for early obfuscation needs. Errors or statistical defects are flagged via interrupts and alerts. The block can also allow firmware-based conditioning with NIST validation."
+  }
+]
