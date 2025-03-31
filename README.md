@@ -64,7 +64,7 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
 
 5. Ensure you have the vector stores in the proper directories:
    - `raptor_output/` - For the OpenTitan documentation
-   - `raptor_output_codebase/` - For the OpenTitan codebase (optional, enables Revelio model)
+   - `raptor_output_codebase/` - For the OpenTitan codebase
 
 ### Frontend Setup
 
