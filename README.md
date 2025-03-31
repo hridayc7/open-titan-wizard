@@ -77,7 +77,7 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
    npm install
    ```
 
-3. Create a `.env` file (optional, for custom API URL):
+3. Create a `.env` file (optional, for custom API URL): [OPTIONAL]
    ```
    REACT_APP_API_URL=http://localhost:5001
    ```
