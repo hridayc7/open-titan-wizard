@@ -102,16 +102,6 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
    - **Lumos**: For conceptual questions about OpenTitan architecture, features, etc.
    - **Revelio**: For technical inquiries about code implementation details
 
-5. Toggle "Advanced Reasoning" for complex questions to get more thorough answers
-
-## Vector Store Preparation
-
-While the repository includes pre-built vector stores, you can build your own:
-
-1. Clone the OpenTitan repository
-2. Process the documentation using the provided scripts
-   - See the detailed instructions in `docs/vector_store_generation.md`
-
 ## API Endpoints
 
 - `POST /api/chat`: Send a query and receive an answer
