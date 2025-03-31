@@ -166,7 +166,7 @@ However, a mistake I made was that I weighed documents seen more frequently high
 ## Conclusion
 
 I think there may be some more changes I would make to this project, based on my talk with David and some further introspection. Plus, I can always go back to the codebase and see points that could be easily sped up.  
-But, I’m still proud of the work I put into this project, and it does get a lot of things correct as well. Only way is up 🙂
+But, I’m still proud of the work I put into this project, and it does get a lot of things correct as well. To test it further, I would create a ground truth set of questions and answers, and then query the chatbot and store the answers it provides in a json file. Then, i'd use an LLM to compare the two answers and rank how well the chatbot did. 
 
 
 ## Note to David and Jefferey
