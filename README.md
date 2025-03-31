@@ -132,17 +132,5 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
         └── App.css              # Styling
 ```
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgements
-
-- [OpenTitan Project](https://opentitan.org/) for the excellent documentation and codebase
-- [Anthropic Claude](https://www.anthropic.com/claude) for the language model
-- [FAISS](https://github.com/facebookresearch/faiss) for vector similarity search
-- [LangChain](https://github.com/langchain-ai/langchain) for RAG components
+## Note to David and Jefferey
+Hey guys, I had a lot of fun and learned quite a bit with this project! Hope you have as much fun using it as I did building it!
