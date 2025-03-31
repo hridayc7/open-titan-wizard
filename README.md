@@ -24,11 +24,10 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to 
 
 ### Frontend (React)
 
-- **Modern UI**: Clean, responsive single-page application
+- **Modern UI**: Clean, responsive single-page application (Inspired by Claude)
 - **State Management**: React hooks for state and localStorage for persistence
 - **Markdown Support**: Real-time rendering of formatted text and code blocks
 - **Chat Management**: History, session tracking, and conversation organization
-- **Model Selection**: Easy switching between Lumos and Revelio models
 
 ## Installation
 
