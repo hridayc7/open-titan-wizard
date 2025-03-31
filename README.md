@@ -2,7 +2,6 @@
 
 A powerful Retrieval-Augmented Generation (RAG) chatbot application designed to answer questions about the OpenTitan project through an intelligent dual-query system that searches both conceptual documentation and source code.
 
-![OpenTitan RAG Assistant](screenshots/demo.png)
 
 ## Features
 
